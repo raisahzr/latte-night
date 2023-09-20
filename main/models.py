@@ -3,11 +3,11 @@ from django.db import models
 # Create your models here.
 class Item(models.Model):
     name = models.CharField(max_length=255)
+    date_added = models.DateField(auto_now_add=True)
     amount = models.IntegerField()
     description = models.TextField()
     price = models.IntegerField()
-    category = models.TextField()
-    coffee_bean = models.TextField()
+    category = models.CharField(max_length=255)
 
     def check_stock(self):
         if self.amount > 0:
@@ -17,6 +17,6 @@ class Item(models.Model):
     
     def checkout(self):
         if self.category == "coffee":
-            return f"Your order is {self.name} with {self.coffee_bean} coffee in total Rp{self.price}."
+            return f"Your order is {self.name} with Arabica coffee in total Rp{self.price}."
         else:
             return f"Your order is {self.name} in total Rp{self.price}."

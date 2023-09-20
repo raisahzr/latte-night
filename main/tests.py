@@ -14,9 +14,9 @@ class mainTest(TestCase):
 
 class ItemTestCase(TestCase):
     def setUp(self):
-        Item.objects.create(name="Ice Americano", amount="0", price=15000, category="coffee", coffee_bean="Arabica")
-        Item.objects.create(name="Caffe Latte", amount="10", price=25000, category="coffee", coffee_bean = "Robusta")
-        Item.objects.create(name="Hibiscus Ice Tea", amount="5", price=20000, category="non-coffee", coffee_bean = "NONE")
+        Item.objects.create(name="Ice Americano", amount="0", price=15000, category="coffee")
+        Item.objects.create(name="Caffe Latte", amount="10", price=25000, category="coffee")
+        Item.objects.create(name="Hibiscus Ice Tea", amount="5", price=20000, category="non-coffee")
 
     def test_products_has_stock(self):
         # check if product has stocks
