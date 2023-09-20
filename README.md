@@ -11,6 +11,7 @@ https://latte-night.adaptable.app
 <details open>
 <summary>Tugas 2</summary>
 <br>
+    
 ## 1. Implementasi Checklist Step by Step
 **a. Membuat proyek Django baru** 
 
@@ -75,6 +76,7 @@ Pilihan antara MVC, MVT, atau MVVM bergantung pada bahasa pemrograman, platform,
 <details>
 <summary>Tugas 3</summary>
 <br>
+    
 ## 1. Apa perbedaan antara form POST dan form GET dalam Django?
 Dalam Django, kita dapat menggunakan metode HTTP POST dan GET untuk mengirim data antara browser pengguna dan server Django. Form POST digunakan untuk mengirim data yang dapat mengubah status server (misalnya perubahan di database), sedangkan Form GET digunakan untuk mengambil data untuk diproses dalam bentuk URL tanpa mengubah status server. Perbedaan utama keduanya adalah metode pengiriman data, di mana Form POST mengirimkan data secara tersembunyi dalam badan permintaan HTTP, sedangkan Form GET mengirimkan data melalui URL sebagai parameter query string. Dari sini kita juga dapat melihat bahwa dari segi keamanan, Form POST dianggap lebih aman untuk mengirim data yang sensitif daripada Form GET yang datanya terlihat dalam URL. Selain itu, dari segi kapasitas data, Form POST dapat mengirimkan data yang lebih besar daripada Form GET karena data dikirim sebagai bagian dari badan permintaan HTTP dan ukurannya tidak dibatasi oleh batas URL.
 
@@ -101,9 +103,9 @@ Terakhir, JSON kompatibel dengan berbagai perangkat dan platform, termasuk peram
 
 ## 4. Implementasi Checklist Step by Step
 **a. Membuat input form untuk menambahkan objek model pada app sebelumnya** 
-Sebelum membuat form, saya pastikan telah membuat skeleton sebagai kerangka views yaitu *base.html* pada direktori utama dan mengimplementasikan template tersebut pada *main.html*. Kemudian pada *settings.py* direktori proyek, bagian TEMPLATES, ubah menjadi 'DIRS': [BASE_DIR / 'templates'] agar *base.html* terdeteksi. Untuk membuat form, saya membuat berkas baru *forms.py* pada direktori aplikasi main (import model aplikasi). Di dalam kelasnya, saya menyatakan "Item", yaitu model saya, sebagai model yanag digunakan untuk form sehingga ketika data dari form disimpan, isi dari form akan disimpan menjadi sebuah objek Item. Field dari model Item yang saya gunakan untuk form mencakup "name", "amount", "description", "price", "category" (coffee/non-coffee). 
+Sebelum membuat form, saya pastikan telah membuat skeleton sebagai kerangka views yaitu `base.html` pada direktori utama dan mengimplementasikan template tersebut pada `main.html`. Kemudian pada `settings.py` direktori proyek, bagian TEMPLATES, ubah menjadi 'DIRS': [BASE_DIR / 'templates'] agar `base.html` terdeteksi. Untuk membuat form, saya membuat berkas baru `forms.py` pada direktori aplikasi main (import model aplikasi). Di dalam kelasnya, saya menyatakan "Item", yaitu model saya, sebagai model yanag digunakan untuk form sehingga ketika data dari form disimpan, isi dari form akan disimpan menjadi sebuah objek Item. Field dari model Item yang saya gunakan untuk form mencakup "name", "amount", "description", "price", "category" (coffee/non-coffee). 
 
-Untuk menampilkan dan mengolah input forms user pada web saya, pertama saya menambahkan beberapa import pada *views.py* (django.http import HttpResponseRedirect, main.forms import ProductForm, django.urls import reverse) dan mendefinisikan sebuah fungsi baru yaitu create_product dengan parameter request. 
+Untuk menampilkan dan mengolah input forms user pada web saya, pertama saya menambahkan beberapa import pada `views.py` (django.http import HttpResponseRedirect, main.forms import ProductForm, django.urls import reverse) dan mendefinisikan sebuah fungsi baru yaitu create_product dengan parameter request. 
 - form = ProductForm(request.POST or None) digunakan untuk membuat ProductForm baru dengan memasukkan QueryDict berdasarkan input dari user pada request.POST.
 - form.is_valid() digunakan untuk memvalidasi isi input dari form tersebut.
 - form.save() digunakan untuk membuat dan menyimpan data dari form tersebut.
@@ -111,10 +113,10 @@ Untuk menampilkan dan mengolah input forms user pada web saya, pertama saya mena
 
 **b. Tambahkan 5 fungsi views untuk melihat objek yang sudah ditambahkan dalam format HTML, XML, JSON, XML by ID, dan JSON by ID**
 HTML
-Pada berkas *views.py* fungsi show_main saya mengambil seluruh objek Item dengan items = Item.objects.all() dan 'items' : item untuk dibaca pada tabel nantinya. Kemudian lakukan routing pada *urls.py* untuk halaman create_product. Selanjutnya saya membuat HTML baru dengan nama *create_product.html* pada direktori templates aplikasi. Step ini berfungsi untuk membuat kerangka tampilan halaman create_product (tetap menggunakan *base.html* sebagai template utama). Di dalamnya mencakup tampilan fields form sebagai tabel, tombol submit untuk mengirim request ke *views.py*, dan menyatakan form method untuk menandakan block form dengan metode POST. Pada *main.html*, saya membuat tabel dengan iterasi object Item yang sudah tersimpan untuk ditampilkan sebagai tabel.
+Pada berkas `views.py` fungsi show_main saya mengambil seluruh objek Item dengan items = Item.objects.all() dan 'items' : item untuk dibaca pada tabel nantinya. Kemudian lakukan routing pada `urls.py` untuk halaman create_product. Selanjutnya saya membuat HTML baru dengan nama `create_product.html` pada direktori templates aplikasi. Step ini berfungsi untuk membuat kerangka tampilan halaman create_product (tetap menggunakan `base.html` sebagai template utama). Di dalamnya mencakup tampilan fields form sebagai tabel, tombol submit untuk mengirim request ke `views.py`, dan menyatakan form method untuk menandakan block form dengan metode POST. Pada `main.html`, saya membuat tabel dengan iterasi object Item yang sudah tersimpan untuk ditampilkan sebagai tabel.
 
 XML DAN JSON
-Import HttpResponse dan Serializer pada *views.py* direktori aplikasi kemudian buatlah fungsi show_xml dan show_json yang menerima parameter request dan berisi variabel "data" yang menyimpan hasil query dari seluruh data yang ada pada Item. Tambahkan return function berupa HttpResponse yang berisi parameter data hasil query yang sudah diserialisasi menjadi XML. serializers digunakan untuk translate objek model menjadi format lain.
+Import HttpResponse dan Serializer pada `views.py` direktori aplikasi kemudian buatlah fungsi show_xml dan show_json yang menerima parameter request dan berisi variabel "data" yang menyimpan hasil query dari seluruh data yang ada pada Item. Tambahkan return function berupa HttpResponse yang berisi parameter data hasil query yang sudah diserialisasi menjadi XML. serializers digunakan untuk translate objek model menjadi format lain.
 def [show_xml/show_json](request):
     data = Item.objects.all()
     return HttpResponse(serializers.serialize("[xml/json]", data), content_type="application/[xml/json]")
@@ -125,8 +127,29 @@ data = Item.objects.filter(pk=id)
 Sedangkan parameter dan return type yang digunakan tetap sama dengan nama fungsi show_xml_by_id/show_json_by_id
 
 **c. Membuat routing URL untuk masing-masing views yang telah ditambahkan pada poin**
-Pada proses ini, pertama saya mengimport semua fungsi tambahan pada poin b yang telah dibuat di dalam *views.html* pada file *urls.py*, kemudian menambahkan parh url ke dalam urlpatterns untuk mengakses fungsi-fungsi yang telah diimpor dengan format path('[nama format]/', [nama fungsi], name='[nama fungsi]'). Untuk XML by ID dan JSON by ID, bentuk format linknya adalah '[xml/json]/<int:id>/'. Kemudian hasilnya dapat dilihat dengan runserver dan membuka link http://localhost:8000/[format data].
+Pada proses ini, pertama saya mengimport semua fungsi tambahan pada poin b yang telah dibuat di dalam *views.html* pada file `urls.py`, kemudian menambahkan parh url ke dalam urlpatterns untuk mengakses fungsi-fungsi yang telah diimpor dengan format path('[nama format]/', [nama fungsi], name='[nama fungsi]'). Untuk XML by ID dan JSON by ID, bentuk format linknya adalah '[xml/json]/<int:id>/'. Kemudian hasilnya dapat dilihat dengan runserver dan membuka link http://localhost:8000/[format data].
 
 
 ## 5. Screenshot hasil akses URL pada postman
+- HTML
+  ![html](https://github.com/raisahzr/latte-night/assets/119391721/9cafbc77-e0ca-471a-8246-9a6393eaec97)
+
+- XML
+  ![xml](https://github.com/raisahzr/latte-night/assets/119391721/06e3c6ae-85af-4a81-b443-ea13e6b91b2d)
+
+- JSON
+  ![json](https://github.com/raisahzr/latte-night/assets/119391721/b3370475-6620-4eeb-8ece-b5f122107c49)
+  
+- XML BY ID
+  ![xml by id](https://github.com/raisahzr/latte-night/assets/119391721/1abae373-b30c-4000-ae81-6edca1344659)
+
+- JSON BY ID
+  ![json by id](https://github.com/raisahzr/latte-night/assets/119391721/5c2f7fc3-0ef3-4ab4-b3de-ace16c83343d)
+
+## 5. Bonus
+Untuk menambahkan pesan yang menunjukkan berapa Item yang disimpan dalam sistem, pada `main/html` saya menambahkan "Current inventory: {{item_amount}} drinks menu stored" di mana variabel item_amount dinyatakan sebagai:
+
+'item_amount' : item.count(),
+
+pada context di berkas `views.py`
 </details>
