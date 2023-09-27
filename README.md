@@ -161,7 +161,7 @@ pada context di berkas `views.py`
 ## 1. Django UserCreationForm, kelebihan dan kekurangannya
 `UserCreationForm` adalah salah satu bentuk yang disediakan oleh Django dalam modul django.contrib.auth.forms untuk memudahkan pembuatan dan pendaftaran pengguna baru dalam aplikasi web Django yang melibatkan otentikasi pengguna. Form ini digunakan untuk mengumpulkan data yang diperlukan untuk membuat pengguna baru seperti nama pengguna (username), password, dan konfirmasi password. Ini adalah salah satu cara yang umum digunakan untuk membuat formulir pendaftaran pengguna dalam proyek Django.
 
-| Kelebihan | Kelebihan |
+| Kelebihan | Kekurangan |
 | --- | --- |
 | Mudah digunakan | ustomisasi terbatas untuk kompleksitas lebih tinggi |
 | Sudah ada validasi bawaan | Tampilan default HTML mungkin tidak sesuai dan harus membuat template sendiri |
