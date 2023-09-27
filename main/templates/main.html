@@ -19,6 +19,9 @@
             <th>Date Added</th>
             <th>Price</th>
             <th>Category</th>
+            <th>Add Stock</th>
+            <th>Substract Stock</th>
+            <th>Delete Item</th>
         </tr>
     
         {% comment %} Berikut cara memperlihatkan data produk di bawah baris ini {% endcomment %}
@@ -31,6 +34,24 @@
                 <td>{{item.date_added}}</td>
                 <td>{{item.price}}</td>
                 <td>{{item.category}}</td>
+                <td>
+                    <form method="post" action="{% url 'main:add_amount' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Add</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post" action="{% url 'main:substract_amount' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Substract</button>
+                    </form>
+                </td>
+                <td>
+                    <form method="post" action="{% url 'main:delete_item' item.id %}">
+                        {% csrf_token %}
+                        <button type="submit">Delete</button>
+                    </form>
+                </td>
             </tr>
         {% endfor %}
     </table>
