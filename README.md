@@ -187,6 +187,7 @@ Penggunaan cookies dalam pengembangan web memiliki risiko potensial yang harus d
 
 ## 5. Implementasi Checklist Step by Step
 **a. Mengimplementasikan fungsi registrasi, login, dan logout untuk memungkinkan pengguna untuk mengakses aplikasi sebelumnya dengan lancar**
+
 Registrasi
 Pada step ini, pertama saya melakukan import redirect, UserCreationForm, dan messages pada `views.py` kemudian saya membuat sebuah fungsi `register` dengan parameter `request`. Isi fungsi ini akan membuat UserCreationForm dengan memasukkan QueryDict dari input user, memvalidasi input, menyimpan data, dan akan secara otomatis redirect ke halaman show_main. Setelah membuat algoritma logikanya, saya membuat kerangka tampilan HTML page register dengan membuat `register.html` untuk menampilkan halaman register di web. Langkah terakhir adalah melakukan *routing* URL pada `urls.py` aplikasi `main` dengan mengimpor fungsi yang dibuat dan menambahkan path url register ke dalam `urlpatterns` untuk mengakses fungsi tersebut.
 
@@ -197,15 +198,19 @@ Logout
 Pada step ini, pertama saya melakukan import logout pada `views.py`, kemudian saya membuat sebuah fungsi `logout_user` dengan parameter `request`. Isi fungsi ini akan melakukan penghapusan sesi pengguna dan secara otomatis redirect ke halaman login. Setelah membuat algoritma logikanya, saya menambahkan kerangka HTML button logout pada `main.html` untuk menampilkan button logout. Langkah terakhir adalah melakukan *routing* URL pada `urls.py` aplikasi `main` dengan mengimpor fungsi yang dibuat dan menambahkan path url logout_user ke dalam `urlpatterns` untuk mengakses fungsi tersebut.
 
 **b. Membuat dua akun pengguna dengan masing-masing tiga dummy data menggunakan model yang telah dibuat pada aplikasi sebelumnya untuk setiap akun di lokal**
+
 Pada step ini, saya coba melakukan registrasi 1 akun terlebih dahulu (raisa_01) sehingga 2 data dummy yang sudah dibuat pada tugas sebelumnya akan menjadi properti Item milik user raisa_01 setelah integrasi user-Item. Setelah itu saya menambahkan satu dummy data lagi pada akun tersebut. Setelah melakukan step integrasi model Item dengan User, saya membuat satu akun lagi (raisa_02) yang isinya akan kosong karena belum ada data Item yang terdaftar terhubung dengan user tersebut. Maka, saya akan menambahkan 3 dummy data baru pada akun tersebut.
+
 <img width="442" alt="user raisa_01" src="https://github.com/raisahzr/latte-night/assets/119391721/a01fddf4-fbe6-4fe9-9e14-f8fa2257c91e">
 
 <img width="442" alt="user raisa_02" src="https://github.com/raisahzr/latte-night/assets/119391721/32b2cb1d-af2d-47cd-9c3c-b57e6b5e74f0">
 
 **c. Menghubungkan `model` Item dengan `User`**
+
 Pada step ini, saya melakukan migrasi model dengan tambahan import user dan menambahkan `user = models.ForeignKey(User,on_delete=models.CASCADE)` untuk menghubungkan satu user dengan satu item menggunakan ForeignKey. Kemudian saya memodifikasi fungsi `create_product` dengan menambahkan parameter `commit=False` yang berfungsi untuk memodifikasi objek terlebih dahulu sebelum disimpan ke database. Terakhir saya menambahkan `Item.objects.filter(user=request.user)` pada show_main untuk hanya menampilkan objek Item yang terasosiasi dengan user.
 
 **d. Menampilkan detail informasi pengguna yang sedang logged in seperti username dan menerapkan cookies seperti last login pada halaman utama aplikasi**
+
 Untuk menampilkan detail informasis pengguna yang sedang logged in, saya mengubah context `name` pada show_main di `views.py` dengan `request.user.username` untuk menyesuaikan nama dengan user yang sedang login. Kemudian untuk menerapkan cookies, pertama pada `views.py` saya melakukan import HttpResponseRedirect, reverse, dan datetime. Selanjutnya saya memodifikasi fungsi login_user dengan menambahkan fungsi untuk cookie bernama `last_login` dengan mengganti kode dalam blok `if user is not None` menjadi:
 ```
 if user is not None:
