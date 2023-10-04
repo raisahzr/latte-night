@@ -5,20 +5,89 @@
 {% endblock meta %}
 
 {% block content %}  
+<style>
+    .register {
+        justify-content: center;
+        align-items: center;
+        max-width: 700px;
+        margin: 40px auto 0;
+        padding: 20px;
+        background: #f4f4f4;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
 
-<div class = "login">
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td {
+        padding: 10px;
+    }
+
+    input.form-control {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    .btn.reg_btn {
+        width: 50%;
+        padding: 10px;
+        background: #c2a790;
+        color: #fff;
+        margin-top: 10px;
+        margin-bottom: 15px;
+        margin-left: 25%;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .btn.reg_btn:hover {
+        background: #3071a9;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    ul li {
+        color: #d9534f;
+    }
+
+    a {
+        text-decoration: none;
+        color: #428bca;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class = "register">
     
-    <h1>Register</h1>  
+    <h2 style="text-align: center;">⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆</h2>
+    <h1 style="font-family: Luminari, serif;">☕ Latte-Night ☕</h1>
 
         <form method="POST" >  
             {% csrf_token %}  
             <table>  
                 {{ form.as_table }}  
-                <tr>  
-                    <td></td>
-                    <td><input type="submit" name="submit" value="Daftar"/></td>  
-                </tr>  
             </table>  
+            <input class="btn reg_btn" submit" name="submit" value="Sign Up"/> 
         </form>
 
     {% if messages %}  
@@ -28,6 +97,8 @@
                 {% endfor %}  
         </ul>   
     {% endif %}
+
+    <p style="text-align: center";>Already have an account? <a href="{% url 'main:login' %}">Login</a></p>
 
 </div>  
 

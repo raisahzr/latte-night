@@ -6,9 +6,81 @@
 
 {% block content %}
 
-<div class = "login">
+<style>
+    .login {
+        justify-content: center;
+        align-items: center;
+        max-width: 500px;
+        margin: 40px auto 0;
+        padding: 20px;
+        background: #f4f4f4;
+        border-radius: 5px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        text-align: center;
+    }
 
-    <h1>Login</h1>
+    h1 {
+        text-align: center;
+        color: #333;
+    }
+
+    form {
+        margin-top: 20px;
+    }
+
+    table {
+        width: 100%;
+    }
+
+    td {
+        padding: 10px;
+    }
+
+    input.form-control {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 10px;
+        box-sizing: border-box;
+    }
+
+    .btn.login_btn {
+        width: 50%;
+        padding: 10px;
+        background: #c2a790;
+        color: #fff;
+        margin-top: 5px;
+        margin-bottom: 15px;
+        border: none;
+        border-radius: 3px;
+        cursor: pointer;
+    }
+
+    .btn.login_btn:hover {
+        background: #3071a9;
+    }
+
+    ul {
+        list-style: none;
+        padding: 0;
+    }
+
+    ul li {
+        color: #d9534f;
+    }
+
+    a {
+        text-decoration: none;
+        color: #428bca;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+</style>
+
+<div class = "login">
+    <h2>⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆</h2>
+    <h1 style="font-family: Luminari, serif;">☕ Latte-Night ☕</h1>
 
     <form method="POST" action="">
         {% csrf_token %}
@@ -22,12 +94,8 @@
                 <td>Password: </td>
                 <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
             </tr>
-
-            <tr>
-                <td></td>
-                <td><input class="btn login_btn" type="submit" value="Login"></td>
-            </tr>
         </table>
+        <input class="btn login_btn" type="submit" value="Login">
     </form>
 
     {% if messages %}
