@@ -230,3 +230,53 @@ response.delete_cookie('last_login')
 Terakhir, untuk menampilkan informasi last login pada halaman main, saya menambahkan `'last_login': request.COOKIES['last_login'],` pada context dan menambahkan variabel {{ last_login }} pada `main.html` untuk ditampilkan.
 
 </details>
+
+<details>
+<summary>Tugas 5</summary>
+<br>
+
+## 1. Element Selector
+| Selektor | Manfaat |	Waktu Penggunaan |
+| --- | --- | --- |
+Elemen (Tag) | Memilih semua elemen HTML dengan jenis tag tertentu | Cocok digunakan ketika ingin menerapkan gaya yang sama pada semua elemen dengan jenis tag yang sama |
+Universal (*) | Memilih semua elemen dalam dokumen HTML | Cocok digunakan ketika ingin menerapkan gaya yang sama pada semua elemen dengan jenis tag yang sama |
+ID (#id) | Memilih elemen berdasarkan atribut id yang unik | Cocok digunakan ketika ingin mengatur gaya untuk elemen tunggal yang memiliki atribut id unik |
+Class (.class) | Memilih elemen berdasarkan atribut class | Cocok digunakan jika ingin menerapkan gaya yang sama pada beberapa elemen dengan atribut class yang sama |
+Atribut ([attribute]) | Memilih elemen berdasarkan atribut HTML | Cocok digunakan jika ingin memilih elemen berdasarkan atribut tertentu, misalnya, ketika ingin mengatur gaya href |
+Pseudo-class (:pseudo-class) | Memilih elemen dalam keadaan tertentu atau berdasarkan interaksi pengguna | Cocok digunakan jika ingin mengubah gaya elemen saat interaksi pengguna, seperti mengubah warna tautan saat diklik (:hover) atau mengatur ulang inputan saat difokuskan (:focus) |
+Pseudo-element (::pseudo-element) | Memilih bagian dari elemen yang mungkin tidak ada dalam markup HTML | Cocok digunakan jika ingin mengatur gaya bagian-bagian tertentu dari elemen, seperti menambahkan konten sebelum atau sesudah elemen (::before dan ::after) atau memformat teks yang dipilih (::selection) |
+
+
+## 2. Tag HTML 5
+Berikut beberapa tag HTML5 yang saya ketahui dan banyak terapkan pada tugas ini:
+| Tag | Deskripsi |
+| --- | --- |
+| `<a>` | Spesifikasi anchor atau tautan |
+| `<body>` | Spesifikasi badan HTML |
+| `<br>` | Satu baris break |
+| `<button>` | Spesifikasi button |
+| `<col>` | Spesifikasi kolom tabel |
+| `<div>` | Spesifikasi section |
+| `<b>` | Spesifikasi bold text |
+| `<font>` | Spesifikasi font |
+| `<head>` | Spesifikasi kepala/informasi dokumen |
+| `<h1> to <h6>` | Spesifikasi header 1 - header 6 |
+| `<html>` | Spesifikasi dokumen HTML |
+| `<img>` | Spesifikasi gambar/foto |
+| `<keygen>` | Generate key information dalam form |
+| `<p>` | Spesifikasi paragraf |
+| `<section>` | Representasi section |
+| `<style>` | Spesifikasi gaya yang digunakan |
+| `<table>` | Spesifikasi tabel |
+| `<th>` | Spesifikasi header tabel |
+| `<tr>` | Spesifikasi baris tabel |
+| `<td>` | Spesifikasi datacell tabel |
+
+## 3. Margin dan padding
+![B1QiTx9ya](https://github.com/raisahzr/latte-night/assets/119391721/8de91934-5db5-413f-b4b7-d03489a12dca)
+| Box Model | Fungsi | Pengaruh | Penggunaan |
+| --- | --- | --- | --- |
+| Margin | Mengosongkan area di sekitar border (transparan) | Memengaruhi jarak antara elemen dengan elemen-elemen di sekitarnya | Digunakan untuk mengontrol jarak antara elemen dengan elemen-elemen lain di sekitarnya |
+| Padding | Mengosongkan area di sekitar konten (transparan) | Memengaruhi jarak antara batas elemen dan kontennya sendiri | Digunakan untuk mengontrol jarak antara batas elemen dan kontennya |
+
+Kesimpulannya, margin mempengaruhi jarak antara elemen dengan elemen di sekitarnya, sedangkan padding mempengaruhi jarak antara batas elemen dan kontennya sendiri. Keduanya berkontribusi pada tata letak dan tampilan halaman web secara keseluruhan.
