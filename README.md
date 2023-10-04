@@ -236,15 +236,16 @@ Terakhir, untuk menampilkan informasi last login pada halaman main, saya menamba
 <br>
 
 ## 1. Element Selector
-| Selektor | Manfaat |	Waktu Penggunaan |
+| Selector | Manfaat |	Waktu Penggunaan |
 | --- | --- | --- |
-Elemen (Tag) | Memilih semua elemen HTML dengan jenis tag tertentu | Cocok digunakan ketika ingin menerapkan gaya yang sama pada semua elemen dengan jenis tag yang sama |
-Universal (*) | Memilih semua elemen dalam dokumen HTML | Cocok digunakan ketika ingin menerapkan gaya yang sama pada semua elemen dengan jenis tag yang sama |
-ID (#id) | Memilih elemen berdasarkan atribut id yang unik | Cocok digunakan ketika ingin mengatur gaya untuk elemen tunggal yang memiliki atribut id unik |
-Class (.class) | Memilih elemen berdasarkan atribut class | Cocok digunakan jika ingin menerapkan gaya yang sama pada beberapa elemen dengan atribut class yang sama |
-Atribut ([attribute]) | Memilih elemen berdasarkan atribut HTML | Cocok digunakan jika ingin memilih elemen berdasarkan atribut tertentu, misalnya, ketika ingin mengatur gaya href |
-Pseudo-class (:pseudo-class) | Memilih elemen dalam keadaan tertentu atau berdasarkan interaksi pengguna | Cocok digunakan jika ingin mengubah gaya elemen saat interaksi pengguna, seperti mengubah warna tautan saat diklik (:hover) atau mengatur ulang inputan saat difokuskan (:focus) |
-Pseudo-element (::pseudo-element) | Memilih bagian dari elemen yang mungkin tidak ada dalam markup HTML | Cocok digunakan jika ingin mengatur gaya bagian-bagian tertentu dari elemen, seperti menambahkan konten sebelum atau sesudah elemen (::before dan ::after) atau memformat teks yang dipilih (::selection) |
+Universal `(*)` | Memilih semua elemen dalam dokumen HTML | Cocok digunakan ketika ingin menerapkan gaya yang sama pada semua elemen dengan jenis tag yang sama |
+Elemen `(Tag)` | Memilih semua elemen HTML dengan jenis tag tertentu | Cocok digunakan ketika ingin menerapkan gaya yang sama pada semua elemen dengan jenis tag yang sama |
+ID `(#id)` | Memilih elemen berdasarkan atribut id yang unik | Cocok digunakan ketika ingin mengatur gaya untuk elemen tunggal yang memiliki atribut id unik |
+Class `(.class)` | Memilih elemen berdasarkan atribut class | Cocok digunakan jika ingin menerapkan gaya yang sama pada beberapa elemen dengan atribut class yang sama |
+Atribut `([attribute])` | Memilih elemen berdasarkan atribut HTML | Cocok digunakan jika ingin memilih elemen berdasarkan atribut khusus |
+Kombinasi `element, element` | Memilih elemen berdasarkan hubungan hierarki atau kombinasi elemen | Cocok untuk memilih elemen yang terkait secara spesifik dalam struktur dokumen |
+Pseudo-class `(:pseudo-class)` | Memilih elemen dalam keadaan tertentu atau berdasarkan interaksi pengguna | Cocok digunakan jika ingin mengubah gaya elemen saat interaksi pengguna, seperti mengubah warna tautan saat diklik (:hover) atau mengatur ulang inputan saat difokuskan (:focus) |
+Pseudo-element `(::pseudo-element)` | Memilih bagian dari elemen yang mungkin tidak ada dalam markup HTML | Cocok digunakan jika ingin mengatur gaya bagian-bagian tertentu dari elemen, seperti menambahkan konten sebelum atau sesudah elemen (::before dan ::after) atau memformat teks yang dipilih (::selection) |
 
 
 ## 2. Tag HTML 5
@@ -280,3 +281,82 @@ Berikut beberapa tag HTML5 yang saya ketahui dan banyak terapkan pada tugas ini:
 | Padding | Mengosongkan area di sekitar konten (transparan) | Memengaruhi jarak antara batas elemen dan kontennya sendiri | Digunakan untuk mengontrol jarak antara batas elemen dan kontennya |
 
 Kesimpulannya, margin mempengaruhi jarak antara elemen dengan elemen di sekitarnya, sedangkan padding mempengaruhi jarak antara batas elemen dan kontennya sendiri. Keduanya berkontribusi pada tata letak dan tampilan halaman web secara keseluruhan.
+
+## 4. Bootstrap dan Tailwind
+| Bootstrap | Tailwind |
+| --- | --- |
+| Menggunakan gaya dan komponen yang telah didefinisikan, yang memiliki tampilan yang sudah jadi dan dapat digunakan secara langsung | Membangun tampilan dengan menggabungkan kelas-kelas utilitas yang telah didefinisikan sebelumnya |
+| Memiliki file CSS yang lebih besar karena termasuk banyak komponen yang telah didefinisikan | Memiliki file CSS yang lebih kecil sedikit karena hanya memuat kelas-kelas utilitas yang ada |
+| Sering kali menghasilkan tampilan yang lebih konsisten di seluruh proyek karena menggunakan komponen yang telah didefinisikan | Memiliki memberikan fleksibilitas dan adaptabilitas tinggi terhadap proyek |
+
+Kesimpulannya, Bootstap lebih cocok digunakan untuk proyek dengan jadwal cepat dan memerlukan antarmuka pengguna yang bagus tanpa banyak kustomisasi, memiliki desain konsisten dan cepat, serta tidak membutuhkan pemahaman kompleks. Sedangkan, Tailwind lebih cocok digunakan untuk proyek yang memerlukan desain yang sangat kustom dan unik,  ingin menghindari kelas-kelas yang tidak digunakan dan memiliki kontrol yang lebih besar terhadap tampilan akhir halaman, dan sudah memiliki pemahaman tingkat lanjut untuk kustomisasi yang fleksibel.
+
+## 5. Implementasi checklist step-by-step
+**a. Kustomisasi halaman login, register, dan tambah inventori semenarik mungkin**
+
+Pertama saya menginisiasi penggunaan Bootstrap pada `base.html` sebagai default template CSS proyek. Untuk ketiga file ini, saya menerapkan styling CSS dengan presedensi yang lebih tinggi (overwrite) menggunakan Internal CSS dan In-line CSS. Untuk penerapannya saya memanfaatkan selektor untuk melakukan kustomisasi yang umumnya terkait warna, font, box model, margin, dan alignment. Misal pada `login.html` saya memanfaatkan selektor Class .login, lalu selektor elemen seperti h1. Sisanya, in-line CSS hnaya saya gunakan jika dibutuhkan pada elemen spesifik tertentu, misal pada h1 yang berisi judul saya ingin memiliki font yang berbeda dari h1 lain. Kemudian untuk memastikan tema yang dimiliki konsisten, Internal CSS pada `regiser.html` dan `create_product` kurang lebih isinya sama.
+
+
+**b. Kustomisasi halaman daftar inventori menjadi lebih berwarna maupun menggunakan apporach lain seperti menggunakan Card**
+
+Sebelumnya, saya menerapkan konsep Internal CSS dan in-line CSS yang mirip pada register, login, tambah inventori. Kemudian, saya memanfaatkan navbar dari Bootstrap untuk membuat navigation bar pada `main.html`
+```
+<nav class="navbar navbar-expand-lg"  style="background-color: #ccc0a7;">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="font-family: Luminari, serif;">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2c/Default_pfp.svg/1200px-Default_pfp.svg.png" height="35px" width="35px" alt="Logo" style="margin-right: 10px;"> 
+                ⋆｡ﾟ☁︎｡⋆｡ ﾟ☾ ﾟ｡⋆ Latte-Night 
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavAltMarkup" style="font-family: Luminari, serif;">
+                <div class="navbar-nav">
+                    <a class="nav-link active" aria-current="page" href="#">Home</a>
+                    <a class="nav-link" href="{% url 'main:create_product' %}">Add New Product</a>
+                    <a class="nav-link" href="{% url 'main:logout' %}">Logout</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+```
+
+Untuk membentuk dafatar inventori menjadi Cards, saya merancang agar pada tampilan cards maksimal 4 buah dalam 1 baris, dan akan berada pada baris berikutnya jika ada penambahan item lagi. Saya juga memanfaatkan style Bootstrap pada button dalam cards seperti primary button (add/substract) dan danger button (delete).
+```
+<div class="container">
+        <div class="row">
+            {% for item in items %}
+                <div class="col-md-3 mb-4">
+                    <div class="card {% if forloop.last %}custom-background{% endif %}">
+                        <div class="card-body">
+                            <h5 class="card-title">{{item.name}}</h5>
+                            <p class="card-text">Amount: {{item.amount}}</p>
+                            <p class="card-text">Description: {{item.description}}</p>
+                            <p class="card-text">Date Added: {{item.date_added}}</p>
+                            <p class="card-text">Price: {{item.price}}</p>
+                            <p class="card-text">Category: {{item.category}}</p>
+                            <div class="text-center">
+                                <form method="post" action="{% url 'main:add_amount' item.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">Add</button>
+                                </form>
+                                <form method="post" action="{% url 'main:substract_amount' item.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-primary">Substract</button>
+                                </form>
+                                <form method="post" action="{% url 'main:delete_item' item.id %}">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn btn-danger">Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% if forloop.counter|divisibleby:4 and not forloop.last %}
+                    </div><div class="row">
+                {% endif %}
+            {% endfor %}
+        </div>
+    </div>
+```
+Notes: `{% if forloop.last %}custom-background{% endif %}` digunakan sebagai conditional agar item terakhir yang terdapat pada inventori memiliki background dan font berbeda (diterapkan melalui selector)
