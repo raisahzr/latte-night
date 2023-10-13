@@ -360,3 +360,33 @@ Untuk membentuk dafatar inventori menjadi Cards, saya merancang agar pada tampil
     </div>
 ```
 Notes: `{% if forloop.last %}custom-background{% endif %}` digunakan sebagai conditional agar item terakhir yang terdapat pada inventori memiliki background dan font berbeda (diterapkan melalui selector)
+</details>
+
+<details>
+<summary>Tugas 6</summary>
+<br>
+
+## 1. Synchronous Programming vs Asynchronous Programming
+| Synchronous | Asynchronous|
+| --- | --- |
+| Eksekusi kode berlangsung secara sekuensial, berarti operasi dilakukan secara berurutan atau sejalan. Dalam programming synchronous, kode dieksekusi baris per baris, dan setiap operasi harus menunggu operasi sebelumnya selesai. Ini sederhana dan mudah dipahami, tapi bisa menjadi bottleneck dalam situasi di mana ada penundaan, seperti saat menunggu respons dari server. Oleh karena itu, synchronous lebih cocok untuk pendekatan programming yang memiliki urutan eksekusi terstruktur | Operasi-operasi yang mungkin membutuhkan waktu, seperti pemanggilan API atau operasi file, dapat dilakukan tanpa harus menunggu operasi tersebut selesai. Kode dapat melanjutkan eksekusi sementara operasi tersebut berlangsung. Asynchronous programming sangat berguna dalam situasi di mana aplikasi perlu merespons terhadap input pengguna atau berkomunikasi dengan server tanpa memblokir eksekusi program |
+
+
+## 2. Event-Driven Programming pada AJAX
+Event-Driven Programming adalah paradigma di mana alur eksekusi program ditentukan oleh kejadian (events) yang terjadi. Dalam JavaScript dan AJAX, program menanggapi kejadian-kejadian tertentu tanpa harus menunggu operasi selesai.
+
+Contoh penerapannya pada tugas ini adalah klik pada tombol add product by ajax akan men-trigger sebuah event yang memunculkan modal form. Selanjutnya saat form di-submit, fungsi dari AJAX adalah mengirim data form tersebut ke server untuk update tampilan web  tanpa harus menunggu pengguna melakukan refresh.
+
+## 3. Penerapan Asynchronous Programming pada AJAX
+AJAX (Asynchronous JavaScript and XML) dirancang untuk bekerja secara asynchronous. Dengan menggunakan AJAX, permintaan ke server dapat dikirim tanpa harus menunda eksekusi program, dan respon dari server ditangani melalui callback functions. Dengan demikian, aplikasi dapat melakukan proses data tanpa harus menunggu operasi lain selesai. 
+
+## 4. Fetch API vs jQuery
+Berikut perbandingan antara Fetch API dan jQuery:
+| Fetch API | jQuery|
+| --- | --- |
+| Fetch API adalah bagian dari standar JavaScript modern yang relatif lebih ringan karena fokus pada pengambilan sumber daya dari jaringan dan pengelolaan respons HTTP |  jQuery yang lebih kuat dan berfitur, bisa dianggap berat jika hanya membutuhkan fungsionalitas AJAX karena  memiliki fitur-fitur lain yang mungkin tidak diperlukan dalam proyek kecil atau aplikasi yang membutuhkan performa maksimal |
+| Fetch API dirancang untuk menjadi modular dan mudah digunakan dengan konsep Promise sehingga lebih bebas dalam membangun arsitektur proyek |  jQuery punya pustaka yang lengkap, sehingga jika hanya digunakan untuk AJAX, jQuery masih membawa sejumlah besar fungsionalitas lain yang mungkin tidak diperlukan |
+
+## 5. Implementasi Step by Step
+
+</details>
