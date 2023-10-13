@@ -388,5 +388,153 @@ Berikut perbandingan antara Fetch API dan jQuery:
 | Fetch API dirancang untuk menjadi modular dan mudah digunakan dengan konsep Promise sehingga lebih bebas dalam membangun arsitektur proyek |  jQuery punya pustaka yang lengkap, sehingga jika hanya digunakan untuk AJAX, jQuery masih membawa sejumlah besar fungsionalitas lain yang mungkin tidak diperlukan |
 
 ## 5. Implementasi Step by Step
+**a. Ubah kode cards data item agar mendukung AJAX GET dan lakukan pengambilan task menggunakan AJAX GET**
+Menghapus representasi cards sebelumnya dengan `<div class="row" id="item-cards"></div>` lalu membuat fungsi 
+```
+def get_product_json(request):
+    product_item = Item.objects.filter(user=request.user)
+    return HttpResponse(serializers.serialize('json', product_item))
+```
+Kemudian import dan routing fungsi tersebut pada `urls.py`.
+Terakhir, tambahkan fungsi `getProducts()` pada blok <script>:
+```
+async function getProducts() {
+            return fetch("{% url 'main:get_product_json' %}").then((res) => res.json());
+        }
+```
 
+**b. Buat tombol untuk membuka modal form untuk menambahkan item**
+
+Pada `main.html` tambahkan button ` <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Add Product by AJAX</button>` dan kode untuk membuat modal:
+```
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Add New Product</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form" onsubmit="return false;">
+                        {% csrf_token %}
+                        <div class="mb-3">
+                            <label for="name" class="col-form-label">Name:</label>
+                            <input type="text" class="form-control" id="name" name="name"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="amount" class="col-form-label">Amount:</label>
+                            <input type="number" class="form-control" id="amount" name="amount"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="price" class="col-form-label">Price:</label>
+                            <input type="number" class="form-control" id="price" name="price"></input>
+                        </div>
+                        <div class="mb-3">
+                            <label for="description" class="col-form-label">Description:</label>
+                            <textarea class="form-control" id="description" name="description"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="category" class="col-form-label">Category:</label>
+                            <input type="text" class="form-control" id="category" name="category"></input>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="button_add" data-bs-dismiss="modal">Add Product</button>
+                </div>
+            </div>
+        </div>
+    </div>
+```
+
+**c. Buat fungsi view untuk menambahkan item baru**
+
+Import `from django.views.decorators.csrf` lalu tambahkan fungsi create_ajax dan menyesuaikan isinya dengan models yang saya punya
+```
+def create_ajax(request):
+    if request.method == 'POST':
+        name = request.POST.get("name")
+        amount = request.POST.get("amount")
+        price = request.POST.get("price")
+        description = request.POST.get("description")
+        category = request.POST.get("category")
+        user = request.user
+
+        new_product = Item(name=name, amount=amount, price=price, description=description, category=category, user=user)
+        new_product.save()
+
+        return HttpResponse(b"CREATED", status=201)
+
+    return HttpResponseNotFound()
+```
+
+**d. Buat path `/create-ajax/` yang mengarah ke fungsi view tadi**
+
+Import fungsi tersebut kemudian menambahkan path fungsi di views ke `urls.py`:
+`path('create-ajax/', create_ajax, name='create_ajax'),`
+
+**e. Hubungkan form yang telah dibuat di dalam modal ke path `/create-ajax/`**
+
+Tambahkan fungsi `addProduct()` pada `main.html` dalam blok `<script>`:
+```
+function addProduct() {
+            fetch("{% url 'main:create_ajax' %}", {
+                method: "POST",
+                body: new FormData(document.querySelector('#form'))
+            }).then(refreshProducts);
+            window.location.reload()
+
+            document.getElementById("form").reset();
+            return false;
+        }
+
+        document.getElementById("button_add").onclick = addProduct;
+    </script>
+```
+
+**f.Refresh halaman utama secara async untuk menampilkan daftar item terbaru tanpa reload**
+
+Tambahkan fungsi `refreshProducts()` pada blok `<script>`:
+```
+async function refreshProducts() {
+            const cardContainer = document.getElementById("product_cards");
+            cardContainer.innerHTML = "";
+            const products = await getProducts();
+
+            products.forEach((item) => {
+                const card = document.createElement("div");
+                const addAmount = `{% url 'main:add_amount' 999999%}`.replace('999999', item.id);
+                const subsAmount = `{% url 'main:substract_amount' 999999%}`.replace('999999', item.id);
+                const delItem = `{% url 'main:delete_item' 999999%}`.replace('999999', item.id);
+                card.className = "col-md-3 mb-4";
+                card.classList.add(className);
+
+                const cardContent = `
+                    <div class="card ${item.is_last ? 'custom-background' : ''}">
+                        <div class="card-body">
+                            <h5 class="card-title">${item.fields.name}</h5>
+                            <p class="card-text">Amount: ${item.fields.amount}</p>
+                            <p class="card-text">Description: ${item.fields.description}</p>
+                            <p class="card-text">Date Added: ${item.fields.date_added}</p>
+                            <p class="card-text">Price: ${item.fields.price}</p>
+                            <p class="card-text">Category: ${item.fields.category}</p>
+                            <div class="text-center">
+                                <a href="${addAmount}" class="btn btn-primary" Add</a>
+                                <a href="${subsAmount}" class="btn btn-primary" Substract</a>
+                                <a href="${delItem}" class="btn btn-danger" Delete</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                card.innerHTML = cardContent;
+            });
+        }
+
+        refreshProducts();
+```
+
+**g. collectstatic**
+
+Menambahkan STATIC_URL dan STATIC_ROOT ke `settings.py` lalu menjalankan command `python manage.py collect static`.
 </details>
