@@ -386,6 +386,10 @@ Berikut perbandingan antara Fetch API dan jQuery:
 | --- | --- |
 | Fetch API adalah bagian dari standar JavaScript modern yang relatif lebih ringan karena fokus pada pengambilan sumber daya dari jaringan dan pengelolaan respons HTTP |  jQuery yang lebih kuat dan berfitur, bisa dianggap berat jika hanya membutuhkan fungsionalitas AJAX karena  memiliki fitur-fitur lain yang mungkin tidak diperlukan dalam proyek kecil atau aplikasi yang membutuhkan performa maksimal |
 | Fetch API dirancang untuk menjadi modular dan mudah digunakan dengan konsep Promise sehingga lebih bebas dalam membangun arsitektur proyek |  jQuery punya pustaka yang lengkap, sehingga jika hanya digunakan untuk AJAX, jQuery masih membawa sejumlah besar fungsionalitas lain yang mungkin tidak diperlukan |
+| Menggunakan konsep Promise, yang membuat penanganan asynchronous lebih mudah dibaca dan ditulis | Menggunakan konsep callback, yang bisa membuat beberapa lapisan callback dan membuat kode tampak lebih bersarang |
+| Lebih modern, oleh karena itu bisa tidak didukung oleh browser yang lebih tua tanpa menggunakan polifil (polyfill) | Dikenal karena kompatibilitas lintas-browsernya yang baik, termasuk dengan browser lama |
+| Memberikan lebih banyak kontrol dan kustomisasi terhadap request dan respons | Menyederhanakan banyak detail, yang bisa menjadi kelebihan atau kekurangan tergantung pada kebutuhan proyek |
+
 
 ## 5. Implementasi Step by Step
 **a. Ubah kode cards data item agar mendukung AJAX GET dan lakukan pengambilan task menggunakan AJAX GET**
