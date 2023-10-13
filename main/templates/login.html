@@ -37,10 +37,13 @@
     }
 
     input.form-control {
-        width: 100%;
+        width: 75%;
         padding: 8px;
         margin-bottom: 10px;
+        margin-left: 50px;
         box-sizing: border-box;
+        align-items: center;
+        text-align: center;
     }
 
     .btn.login_btn {
@@ -86,12 +89,12 @@
         {% csrf_token %}
         <table>
             <tr>
-                <td>Username: </td>
+                
                 <td><input type="text" name="username" placeholder="Username" class="form-control"></td>
             </tr>
                     
             <tr>
-                <td>Password: </td>
+                
                 <td><input type="password" name="password" placeholder="Password" class="form-control"></td>
             </tr>
         </table>
